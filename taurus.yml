@@ -1,0 +1,31 @@
+# Taurus configuration to run the above Locust script
+# Run with:  bzt taurus.yml
+execution:
+  - executor: locust
+    concurrency: 20        # total concurrent users
+    ramp-up: 5m            # ramp up
+    hold-for: 10m           # test duration
+    locations:
+      harbor-62b144dbf9da45689569e603: 1
+      #us-west-1: 1
+      #us-east-1: 1
+    #locations-weighted: false
+    scenario: dbank_scenario
+    secrets:
+    - dbank_rgarcia_password
+
+scenarios:
+  dbank_scenario:
+    script: locustfile.py
+    default-address: http://dbankdemo.com   # passed to Locust as --host
+    # additional-options: ["--stop-timeout", "60"]  # optional extras for locust
+
+reporting:
+  - module: console
+  - module: final-stats
+    summary: true
+    percentiles: true
+  #- module: passfail
+  #  criteria:
+  #    - avg-rt>1500ms for 1m, stop as failed
+  #    - failures>1% for 1m, stop as failed

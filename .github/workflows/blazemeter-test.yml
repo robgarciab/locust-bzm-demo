@@ -1,0 +1,37 @@
+name: BlazeMeter Load Test
+env:
+  apiKey: ${{ secrets.BLAZEMETER_API_KEY }}
+  apiSecret: ${{ secrets.BLAZEMETER_API_SECRET }}
+  testID: ${{ secrets.BLAZEMETER_TEST_ID }}
+  inputStartFile: "taurus.yml"
+  inputAllFiles: "."
+  uploadFileCheck: "true"
+  continuePipeline: "false"
+  showTailLog: "false"
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  blazemeter-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Run BlazeMeter test
+        uses: BlazeRunner-BZR/Github-Action@v8.1
+        id: run-test
+        with:
+          apiKey: ${{ env.apiKey }}
+          apiSecret: ${{ env.apiSecret }}
+          testID: ${{ env.testID }}
+          inputStartFile: ${{ env.inputStartFile }}
+          inputAllFiles: ${{ env.inputAllFiles }}
+          uploadFileCheck: ${{ env.uploadFileCheck }}
+          continuePipeline: ${{ env.continuePipeline }}
+          showTailLog: ${{ env.showTailLog }}
