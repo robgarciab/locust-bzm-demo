@@ -4,7 +4,7 @@ env:
   apiSecret: ${{ secrets.BLAZEMETER_API_SECRET }}
   testID: ${{ secrets.BLAZEMETER_TEST_ID }}
   inputStartFile: "taurus.yml"
-  inputAllFiles: "."
+  inputAllFiles: "locustfile.py"
   uploadFileCheck: "true"
   continuePipeline: "false"
   showTailLog: "false"
