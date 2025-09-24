@@ -4,11 +4,11 @@ execution:
   - executor: locust
     concurrency: 20        # total concurrent users
     ramp-up: 2m            # ramp up
-    hold-for: 8m           # test duration
+    hold-for: 3m           # test duration
     locations:
-      #harbor-62b144dbf9da45689569e603: 1
-      us-west-1: 1
-      us-east-1: 1
+      harbor-62b144dbf9da45689569e603: 1
+      #us-west-1: 1
+      #us-east-1: 1
     locations-weighted: false
     scenario: dbank_scenario
 
