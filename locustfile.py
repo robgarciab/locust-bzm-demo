@@ -13,7 +13,7 @@ class DbBankFlow(SequentialTaskSet):
         url = "/bank/api/v1/auth"
         params = {
             "username": "rgarcia@perforce.com",
-            "password": os.getenv("BZM_SECRET_dbank_rgarcia_password", "")
+            "password": "changeit"
         }
         headers = {"Content-Type": "application/json"}
 

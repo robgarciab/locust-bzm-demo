@@ -6,26 +6,23 @@ execution:
     ramp-up: 2m            # ramp up
     hold-for: 8m           # test duration
     locations:
-      harbor-62b144dbf9da45689569e603: 1
-      #us-west-1: 1
-      #us-east-1: 1
-    #locations-weighted: false
+      #harbor-62b144dbf9da45689569e603: 1
+      us-west-1: 1
+      us-east-1: 1
+    locations-weighted: false
     scenario: dbank_scenario
-    secrets:
-    - dbank_rgarcia_password
 
 scenarios:
   dbank_scenario:
     script: locustfile.py
     default-address: http://dbankdemo.com   # passed to Locust as --host
-    # additional-options: ["--stop-timeout", "60"]  # optional extras for locust
 
 reporting:
   - module: console
   - module: final-stats
     summary: true
     percentiles: true
-  #- module: passfail
-  #  criteria:
-  #    - avg-rt>1500ms for 1m, stop as failed
-  #    - failures>1% for 1m, stop as failed
+  - module: passfail
+    criteria:
+      - avg-rt>1500ms for 1m, stop as failed
+      - failures>1% for 1m, stop as failed
