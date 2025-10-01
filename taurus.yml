@@ -11,6 +11,8 @@ execution:
       #us-east-1: 1
     locations-weighted: false
     scenario: dbank_scenario
+    secrets:
+    - dbank_rgarcia_password
 
 scenarios:
   dbank_scenario:
